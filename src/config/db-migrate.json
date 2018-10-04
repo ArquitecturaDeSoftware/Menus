@@ -1,0 +1,31 @@
+{
+  "dev": {
+    "driver": "mysql",
+    "host": "localhost",
+    "user": "root",
+    "password": "1234",
+    "database": "almuerzos",
+    "multipleStatements": true
+
+  },
+  "prod": {
+    "driver": "mysql",
+    "host": {"ENV": "DB_HOST"},
+    "user": {"ENV": "DB_USER"},
+    "password": {"ENV": "DB_PASSWORD"},
+    "database": {"ENV": "DB_NAME"},
+    "port": {"ENV": "DB_PORT"},
+    "multipleStatements": true
+
+  },
+  "test": {
+    "driver": "mysql",
+    "host": "localhost",
+    "user": "root",
+    "password": "1234",
+    "database": "almuerzos",
+    "multipleStatements": true
+  },
+
+  "sql-file" : true
+}

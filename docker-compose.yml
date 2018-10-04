@@ -1,0 +1,15 @@
+version: "2.1"
+services:
+  menu-ms:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - menu-db
+  menu-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: almuerzos
+    ports:
+      - "3306:3306"
