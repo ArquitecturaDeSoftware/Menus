@@ -3,13 +3,13 @@ const menu = require( '../models/menu' );
 module.exports = ( app ) => {
 
   //      GET      \\
-  //Obtener menu por id_comedor
+  //Obtener menu por id_lunchroom
   app.get( '/api/menus', ( req, res ) => {
-    const id_comedor = req.query.id_comedor;
+    const id_lunchroom = req.query.id_lunchroom;
     const get_all = req.query.get_all;
-    if( !isNaN( id_comedor ) ){
+    if( !isNaN( id_lunchroom ) ){
       if( get_all ){
-        menu.getMenusById( id_comedor, ( err, data ) => {
+        menu.getMenusById( id_lunchroom, ( err, data ) => {
           if( !isNaN( err ) ){
             res.json( data );
           }
@@ -21,7 +21,7 @@ module.exports = ( app ) => {
       else{
         const date = new Date( );
         fecha = date.getDate() + '/' + ( date.getMonth() + 1 ) + '/' + date.getFullYear();
-        menu.getMenuById( id_comedor, fecha, ( err, data ) => {
+        menu.getMenuById( id_lunchroom, fecha, ( err, data ) => {
           if( !isNaN( err ) ){
             res.json( data );
           }
@@ -47,7 +47,7 @@ module.exports = ( app ) => {
   //      POST      \\
   //Agregar un menu
   app.post( '/api/menus', ( req, res ) => {
-    if( !req.body.id_comedor ){
+    if( !req.body.id_lunchroom ){
       res.status(400).json( { "err": "se debe ingresar un id de comedor" } );
     }
     else{
@@ -55,35 +55,34 @@ module.exports = ( app ) => {
       fecha = date.getDate() + '/' + ( date.getMonth() + 1 ) + '/' + date.getFullYear();
       const menuData = {
         id_menu: null,
-        id_comedor: req.body.id_comedor,
-        fecha: fecha,
-        sopa: req.body.sopa,
-        principio: req.body.principio,
-        seco: req.body.seco,
-        proteina: req.body.proteina,
-        jugo: req.body.jugo,
-        postre: req.body.postre,
-        ensalada: req.body.ensalada
+        id_lunchroom: req.body.id_lunchroom,
+        date: fecha,
+        soup: req.body.soup,
+        appetizer: req.body.appetizer,
+        main_course: req.body.main_course,
+        protein: req.body.protein,
+        juice: req.body.juice,
+        dessert: req.body.dessert,
+        salad: req.body.salad
       };
-      if( !req.body.sopa ) menuData.sopa = "Sin Sopa";
-      if( !req.body.principio ) menuData.principio = "Sin Principio";
-      if( !req.body.seco ) menuData.seco = "Sin Seco";
-      if( !req.body.proteina ) menuData.proteina = "Sin Proteina";
-      if( !req.body.jugo ) menuData.jugo = "Sin Jugo";
-      if( !req.body.postre ) menuData.postre = "Sin Postre";
-      if( !req.body.ensalada ) menuData.ensalada = "Sin Ensalada";
-      menu.getMenuById( req.body.id_comedor, fecha, ( err, data ) => {
+      if( !req.body.soup ) menuData.soup = "Sin soup";
+      if( !req.body.appetizer ) menuData.appetizer = "Sin appetizer";
+      if( !req.body.main_course ) menuData.main_course = "Sin main_course";
+      if( !req.body.protein ) menuData.protein = "Sin protein";
+      if( !req.body.juice ) menuData.juice = "Sin juice";
+      if( !req.body.dessert ) menuData.dessert = "Sin dessert";
+      if( !req.body.salad ) menuData.salad = "Sin salad";
+      menu.getMenuById( req.body.id_lunchroom, fecha, ( err, data ) => {
         if( !isNaN( err ) ){
           if( !( Object.keys( data ).length === 0 ) ){
-            if( data[0]['fecha'] == fecha ){
+            if( data[0]['date'] == fecha ){
               res.status( 400 ).json( {"msg" : "Can't create two menus on the same day"} );
             }
             else{
               menu.createMenu( menuData, ( err, data ) => {
                 if( !isNaN( err ) ){
                   if( data && data.insertId ){
-                    console.log( fecha );
-                    res.redirect( "/api/menus/?id_comedor=" + req.body.id_comedor );
+                    res.redirect( "/api/menus/?id_lunchroom=" + req.body.id_lunchroom );
                   }
                 }
                 else{
@@ -96,8 +95,7 @@ module.exports = ( app ) => {
             menu.createMenu( menuData, ( err, data ) => {
               if( !isNaN( err ) ){
                 if( data && data.insertId ){
-                  console.log( fecha );
-                  res.redirect( "/api/menus/?id_comedor=" + req.body.id_comedor );
+                  res.redirect( "/api/menus/?id_lunchroom=" + req.body.id_lunchroom );
                 }
               }
               else{
@@ -112,27 +110,27 @@ module.exports = ( app ) => {
 
   //      PUT      \\
   app.put( '/api/menus', ( req, res ) => {
-    const id_comedor = req.query.id_comedor;
+    const id_lunchroom = req.query.id_lunchroom;
     const menuData = {
-      sopa: req.body.sopa,
-      principio: req.body.principio,
-      seco: req.body.seco,
-      proteina: req.body.proteina,
-      jugo: req.body.jugo,
-      postre: req.body.postre,
-      ensalada: req.body.ensalada
+      soup: req.body.soup,
+      appetizer: req.body.appetizer,
+      main_course: req.body.main_course,
+      protein: req.body.protein,
+      juice: req.body.juice,
+      dessert: req.body.dessert,
+      salad: req.body.salad
     };
-    if( !req.body.sopa ) menuData.sopa = "Sin Sopa";
-    if( !req.body.principio ) menuData.principio = "Sin Principio";
-    if( !req.body.seco ) menuData.seco = "Sin Seco";
-    if( !req.body.proteina ) menuData.proteina = "Sin Proteina";
-    if( !req.body.jugo ) menuData.jugo = "Sin Jugo";
-    if( !req.body.postre ) menuData.postre = "Sin Postre";
-    if( !req.body.ensalada ) menuData.ensalada = "Sin Ensalada";
+    if( !req.body.soup ) menuData.soup = "Sin soup";
+    if( !req.body.appetizer ) menuData.appetizer = "Sin appetizer";
+    if( !req.body.main_course ) menuData.main_course = "Sin main_course";
+    if( !req.body.protein ) menuData.protein = "Sin protein";
+    if( !req.body.juice ) menuData.juice = "Sin juice";
+    if( !req.body.dessert ) menuData.dessert = "Sin dessert";
+    if( !req.body.salad ) menuData.salad = "Sin salad";
     const date = new Date();
     fecha = date.getDate() + '/' + ( date.getMonth() + 1 ) + '/' + date.getFullYear();
-    if( !isNaN( id_comedor ) ){
-      menu.updateMenu( id_comedor, fecha, menuData, ( err, data ) => {
+    if( !isNaN( id_lunchroom ) ){
+      menu.updateMenu( id_lunchroom, fecha, menuData, ( err, data ) => {
         if( !isNaN( err ) ){
           if( data && data.msg ){
             res.json( data );

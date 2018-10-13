@@ -40,17 +40,17 @@ paths:
           schema:
             $ref: '#/definitions/ServerErrorModel'
     get:
-      summary: Returns all Menus, just current, or all menu in the specific restaurant
+      summary: Returns all Menus, just current, or all menu in the specific lunchroom
       operationId: getMenus
       parameters:
         - name: query
           in: query
-          description: The id of the menu's restaurant to be returned
+          description: The id of the menu's lunchroom to be returned
           required: false
           type: integer
         - name: get_all
           in: query
-          description: If it's true, returns all menus in the specific restaurant
+          description: If it's true, returns all menus in the specific lunchroom
           required: false
       responses:
         '200':
@@ -62,12 +62,12 @@ paths:
           schema:
             $ref: '#/definitions/ServerErrorModel'
     put:
-      summary: Updates a menu with the given id_comedor
+      summary: Updates a menu with the given id_lunchroom
       operationId: updateMenu
       parameters:
-        - name: id_comedor
+        - name: id_lunchroom
           in: query
-          description: The id of the menu's restaurant to be updated
+          description: The id of the menu's lunchroom to be updated
           required: true
           type: integer
         - name: menu
@@ -98,23 +98,23 @@ definitions:
     properties:
       id_menu:
         type: integer
-      id_comedor:
+      id_lunchroom:
         type: integer
-      fecha:
+      date:
         type: string
-      sopa:
+      soup:
         type: string
-      principio:
+      appetizer:
         type: string
-      seco:
+      main_course:
         type: string
-      proteina:
+      protein:
         type: string
-      jugo:
+      juice:
         type: string
-      postre:
+      dessert:
         type: string
-      ensalada:
+      salad:
         type: string
 
   MenuInput:
@@ -122,23 +122,23 @@ definitions:
     properties:
       id_menu:
         type: integer
-      id_comedor:
+      id_lunchroom:
         type: integer
-      fecha:
+      date:
         type: string
-      sopa:
+      soup:
         type: string
-      principio:
+      appetizer:
         type: string
-      seco:
+      main_course:
         type: string
-      proteina:
+      protein:
         type: string
-      jugo:
+      juice:
         type: string
-      postre:
+      dessert:
         type: string
-      ensalada:
+      salad:
         type: string
 
   MenusList:

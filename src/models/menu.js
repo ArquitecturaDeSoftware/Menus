@@ -4,15 +4,16 @@ connection = mysql.createConnection({
   host: '192.168.99.101',
   user: 'root',
   password: '1234',
-  database: 'almuerzos'
+  database: 'lunch'
 });
 
 const menuModel = {};
 
 menuModel.getMenus = ( callback ) => {
+  console.log( connection );
   if( connection ){
     connection.query(
-      `SELECT * FROM menu ORDER BY id_comedor`,
+      `SELECT * FROM menu ORDER BY id_lunchroom`,
       ( err, rows ) => {
         if( err ){
           callback( err, rows );
@@ -26,11 +27,11 @@ menuModel.getMenus = ( callback ) => {
 };
 
 
-menuModel.getMenuById = ( id_comedor, fecha, callback ) => {
+menuModel.getMenuById = ( id_lunchroom, date, callback ) => {
   if( connection ){
     var sql = `
-    SELECT * FROM menu WHERE id_comedor = ${connection.escape( id_comedor )}
-    AND fecha LIKE ${connection.escape( fecha )};
+    SELECT * FROM menu WHERE id_lunchroom = ${connection.escape( id_lunchroom )}
+    AND date LIKE ${connection.escape( date )};
     `;
     connection.query(
       sql,
@@ -46,10 +47,10 @@ menuModel.getMenuById = ( id_comedor, fecha, callback ) => {
   }
 };
 
-menuModel.getMenusById = ( id_comedor, callback ) => {
+menuModel.getMenusById = ( id_lunchroom, callback ) => {
   if( connection ){
     var sql = `
-    SELECT * FROM menu WHERE id_comedor = ${connection.escape( id_comedor )}
+    SELECT * FROM menu WHERE id_lunchroom = ${connection.escape( id_lunchroom )}
     `;
     connection.query(
       sql,
@@ -80,19 +81,19 @@ menuModel.createMenu = ( menuData, callback ) => {
   }
 };
 
-menuModel.updateMenu = ( id_comedor, fecha, menuData, callback ) => {
+menuModel.updateMenu = ( id_lunchroom, date, menuData, callback ) => {
   if( connection ){
     const sql = `
     UPDATE menu SET
-    sopa = ${connection.escape( menuData.sopa ) },
-    principio = ${connection.escape( menuData.principio )},
-    seco = ${connection.escape( menuData.seco )},
-    proteina = ${connection.escape( menuData.proteina )},
-    jugo = ${connection.escape( menuData.jugo )},
-    postre = ${connection.escape( menuData.postre )},
-    ensalada = ${connection.escape( menuData.ensalada )}
-    WHERE id_comedor = ${connection.escape( id_comedor )} AND
-    fecha LIKE ${connection.escape( fecha ) }
+    soup = ${connection.escape( menuData.soup ) },
+    appetizer = ${connection.escape( menuData.appetizer )},
+    main_course = ${connection.escape( menuData.main_course )},
+    protein = ${connection.escape( menuData.protein )},
+    juice = ${connection.escape( menuData.juice )},
+    dessert = ${connection.escape( menuData.dessert )},
+    salad = ${connection.escape( menuData.salad )}
+    WHERE id_lunchroom = ${connection.escape( id_lunchroom )} AND
+    date LIKE ${connection.escape( date ) }
     `;
     connection.query(
       sql,

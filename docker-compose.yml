@@ -2,6 +2,7 @@ version: "2.1"
 services:
   menu-ms:
     build: .
+    command: node src/index.js && db-migrate up --config src/config/db-migrate.json -e prod
     ports:
       - "3000:3000"
     depends_on:
@@ -10,6 +11,6 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: almuerzos
+      MYSQL_DATABASE: lunch
     ports:
       - "3306:3306"

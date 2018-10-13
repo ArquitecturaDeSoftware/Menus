@@ -4,17 +4,18 @@
     "host": "localhost",
     "user": "root",
     "password": "1234",
-    "database": "almuerzos",
+    "database": "lunch",
+    "port": "3306",
     "multipleStatements": true
 
   },
   "prod": {
     "driver": "mysql",
-    "host": {"ENV": "DB_HOST"},
-    "user": {"ENV": "DB_USER"},
-    "password": {"ENV": "DB_PASSWORD"},
-    "database": {"ENV": "DB_NAME"},
-    "port": {"ENV": "DB_PORT"},
+    "host": "192.168.99.101",
+    "user": "root",
+    "password": "1234",
+    "database": "lunch",
+    "port": "3306",
     "multipleStatements": true
 
   },
@@ -23,7 +24,8 @@
     "host": "localhost",
     "user": "root",
     "password": "1234",
-    "database": "almuerzos",
+    "port": "3306",
+    "database": "lunch",
     "multipleStatements": true
   },
 
