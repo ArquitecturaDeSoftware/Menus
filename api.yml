@@ -1,4 +1,3 @@
-#test with: http://editor.swager.io/
 swagger: '2.0'
 info:
   version: 1.0.0
