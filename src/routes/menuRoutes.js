@@ -3,7 +3,9 @@ const menu = require( '../models/menu' );
 module.exports = ( app ) => {
 
   //      GET      \\
-  //Obtener menu por id_lunchroom
+  //Obtener todos los menus
+  //Obtener menú del día por id_lnchroom
+  //Obtener todos los menus por id_lunchroom
   app.get( '/api/menus', ( req, res ) => {
     const id_lunchroom = req.query.id_lunchroom;
     const get_all = req.query.get_all;
