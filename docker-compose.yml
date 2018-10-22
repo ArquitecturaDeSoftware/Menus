@@ -2,7 +2,6 @@ version: "2.1"
 services:
   menu-ms:
     build: .
-    command: node src/index.js && db-migrate up --config src/config/db-migrate.json -e prod
     ports:
       - "3000:3000"
     depends_on:

@@ -1,7 +1,7 @@
 const mysql = require( 'mysql' );
 
 connection = mysql.createConnection({
-  host: '192.168.99.101',
+  host: 'localhost',
   user: 'root',
   password: '1234',
   database: 'lunch'
@@ -10,10 +10,9 @@ connection = mysql.createConnection({
 const menuModel = {};
 
 menuModel.getMenus = ( callback ) => {
-  console.log( connection );
   if( connection ){
     connection.query(
-      `SELECT * FROM menu ORDER BY id_lunchroom`,
+      `SELECT * FROM menu`,
       ( err, rows ) => {
         if( err ){
           callback( err, rows );
@@ -30,7 +29,7 @@ menuModel.getMenus = ( callback ) => {
 menuModel.getMenuById = ( id_lunchroom, date, callback ) => {
   if( connection ){
     var sql = `
-    SELECT * FROM menu WHERE id_lunchroom = ${connection.escape( id_lunchroom )}
+    SELECT * FROM menu WHERE id_lunchroom LIKE ${connection.escape( id_lunchroom )}
     AND date LIKE ${connection.escape( date )};
     `;
     connection.query(
@@ -50,7 +49,7 @@ menuModel.getMenuById = ( id_lunchroom, date, callback ) => {
 menuModel.getMenusById = ( id_lunchroom, callback ) => {
   if( connection ){
     var sql = `
-    SELECT * FROM menu WHERE id_lunchroom = ${connection.escape( id_lunchroom )}
+    SELECT * FROM menu WHERE id_lunchroom LIKE ${connection.escape( id_lunchroom )}
     `;
     connection.query(
       sql,
@@ -92,7 +91,7 @@ menuModel.updateMenu = ( id_lunchroom, date, menuData, callback ) => {
     juice = ${connection.escape( menuData.juice )},
     dessert = ${connection.escape( menuData.dessert )},
     salad = ${connection.escape( menuData.salad )}
-    WHERE id_lunchroom = ${connection.escape( id_lunchroom )} AND
+    WHERE id_lunchroom LIKE ${connection.escape( id_lunchroom )} AND
     date LIKE ${connection.escape( date ) }
     `;
     connection.query(

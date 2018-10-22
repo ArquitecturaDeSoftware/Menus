@@ -4,12 +4,12 @@ module.exports = ( app ) => {
 
   //      GET      \\
   //Obtener todos los menus
-  //Obtener menú del día por id_lnchroom
+  //Obtener menú del día por id_lunchroom
   //Obtener todos los menus por id_lunchroom
   app.get( '/api/menus', ( req, res ) => {
     const id_lunchroom = req.query.id_lunchroom;
     const get_all = req.query.get_all;
-    if( !isNaN( id_lunchroom ) ){
+    if( id_lunchroom !== undefined ){
       if( get_all ){
         menu.getMenusById( id_lunchroom, ( err, data ) => {
           if( !isNaN( err ) ){
@@ -131,7 +131,7 @@ module.exports = ( app ) => {
     if( !req.body.salad ) menuData.salad = "Sin salad";
     const date = new Date();
     fecha = date.getDate() + '/' + ( date.getMonth() + 1 ) + '/' + date.getFullYear();
-    if( !isNaN( id_lunchroom ) ){
+    if( id_lunchroom !== undefined ){
       menu.updateMenu( id_lunchroom, fecha, menuData, ( err, data ) => {
         if( !isNaN( err ) ){
           if( data && data.msg ){

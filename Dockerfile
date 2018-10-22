@@ -6,9 +6,8 @@ COPY package.json .
 
 RUN npm install -g db-migrate
 RUN npm install
-COPY . .
 
-#RUN db-migrate up --config src/config/db-migrate.json -e prod
+COPY . .
 
 ENV PORT 3000
 EXPOSE  $PORT
@@ -20,3 +19,6 @@ ENV DB_NAME lunch
 ENV DB_PORT 3306
 
 CMD node src/index.js
+
+//COPY entrypoint.sh /entrypoint.sh
+//RUN chmod +x /entrypoint.sh

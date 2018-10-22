@@ -1,7 +1,7 @@
 USE lunch;
 CREATE TABLE IF NOT EXISTS `menu`(
 	`id_menu` INT unsigned NOT NULL AUTO_INCREMENT,
-	`id_lunchroom` INT unsigned NOT NULL,
+	`id_lunchroom` VARCHAR(200) collate utf8_unicode_ci NOT NULL,
   `date` VARCHAR(20),
   `soup` VARCHAR(200) collate utf8_unicode_ci,
   `appetizer` VARCHAR(200) collate utf8_unicode_ci,
