@@ -20,5 +20,3 @@ ENV DB_PORT 3306
 
 CMD node src/index.js
 
-//COPY entrypoint.sh /entrypoint.sh
-//RUN chmod +x /entrypoint.sh
